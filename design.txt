@@ -1,0 +1,16 @@
+
+Problem: Create an app that will compile an importable version of the .CSV as a .XLSX file using the
+    following columns (no header).
+
+    Expected Output:
+    ---------------------------
+    <name of product>,<Barcode>
+    ...
+
+Barcode attribute is a priority of:
+    upc > Manufacturer Product Id > sku
+
+
+
+
+
