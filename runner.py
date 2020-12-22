@@ -1,4 +1,7 @@
-from InventoryImportCompiler import StageLoader, Processor, XLSX
+from InventoryImportCompiler import (
+    StageLoader, CsvToXlsxConverter, XLSX
+)
+
 import datetime
 
 
@@ -7,8 +10,6 @@ def main():
 
     if stage._staged_files_exist():
         process_staged_files(stage.staged_files)
-    else:
-        print(f"No files have been staged, please insert.")
 
 
 def process_staged_files(staged_files):

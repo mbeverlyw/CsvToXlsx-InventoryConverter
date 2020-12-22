@@ -1,6 +1,14 @@
 import pandas as pd
 from re import sub
 
+from . import CSV
+from .exceptions import (
+    NotCsvObject,
+    ColumnNotFoundInMethodLink,
+    NoTargetCsvObjectError,
+)
+
+
 # XLSX Columns
 XLSX_PRODUCT_TITLE = 'TITLE'
 XLSX_BARCODE = 'BARCODE'
@@ -25,7 +33,7 @@ COLUMNS_TO_EXTRACT = [
 CSV_BARCODES_PER_PRIORITY = [CSV_UPC, CSV_MANU_ID, CSV_SKU]
 
 
-class Processor:
+class CsvToXlsxConverter:
     csv_file = None
     extracted_csv_data = None
     generated_xlsx_data = None
@@ -38,36 +46,61 @@ class Processor:
         }
     
     def set_csv(self, csv_file):
-        self.csv_file = csv_file
+        def _is_CSV_instance():
+            return isinstance(csv_file, CSV)
+        
+        def _is_valid_CSV():
+            return csv_file.is_valid_filetype()
 
-    def print_data(self):
-        print(self.generated_xlsx_data)
+        def _save_set_action():
+            self.csv_file = csv_file
+            return True
 
-    def extract_csv_data(self):
-        self.extracted_csv_data = pd.DataFrame(
-            self.csv_file.data, columns=COLUMNS_TO_EXTRACT
-            )
+        if _is_CSV_instance() and _is_valid_CSV():
+            return _save_set_action()
+
+        else:
+            raise NotCsvObject("Object type is not compatible")
+
+    def extract_csv_data(self):            
+        try:
+            self.extracted_csv_data = pd.DataFrame(
+                self.csv_file.data, 
+                columns=COLUMNS_TO_EXTRACT
+                )
+
+        except AttributeError:
+            raise NoTargetCsvObjectError
+        
+        return True  
     
     def generate_xlsx_data(self):
         self.extract_csv_data()
 
-        self.generated_xlsx_data = pd.DataFrame(columns=XLSX_COLUMNS)
+        generated_xlsx_data = self._create_blank_xlsx(XLSX_COLUMNS)
 
         for index, csv_row in self.extracted_csv_data.iterrows():
-            generated_row = self._get_blank_generated_row()
+            generated_row = self._get_blank_generated_row(XLSX_COLUMNS)
             
             generated_row = self._insert_extracted_row_data(generated_row, csv_row)
             
-            self.generated_xlsx_data = self.generated_xlsx_data.append(
+            generated_xlsx_data = generated_xlsx_data.append(
                 generated_row, ignore_index=True
                 )
 
-        print(self.generated_xlsx_data)
+        return generated_xlsx_data
 
     @staticmethod
-    def _get_blank_generated_row():
-        blank_row = {column_label: None for column_label in XLSX_COLUMNS}
+    def _get_blank_generated_row(column_labels):
+        blank_row = {
+            column_label: None for column_label in column_labels
+            }
         return blank_row
+
+    @staticmethod
+    def _create_blank_xlsx(column_labels):
+        blank_xlsx = pd.DataFrame(columns=column_labels)
+        return blank_xlsx
 
     def _insert_extracted_row_data(self, generated_row, csv_row):
         populated_row = generated_row.copy()
@@ -81,7 +114,10 @@ class Processor:
         return populated_row
 
     def _get_method_to_get_column_val(self, column_label):
-        return self.column_to_method_link[column_label]
+        try:
+            return self.column_to_method_link[column_label]
+        except KeyError:
+            raise ColumnNotFoundInMethodLink
 
     @staticmethod
     def _get_title_from_row(row):
@@ -98,11 +134,14 @@ class Processor:
             if not cls._is_empty(barcode_val):
                 return barcode_val
         else:
-            return "NOT FOUND"
+            return ""
 
     @staticmethod
     def _is_empty(cell_value):
-        return True if cell_value == "" else False
+        if (cell_value == "" or cell_value is None):
+            return True
+        else:
+            return False
 
 
 

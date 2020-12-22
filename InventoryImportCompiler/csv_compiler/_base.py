@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd
 
 CSV_FILE_EXTENSION = r".*.[cC][sS][vV]$"
-XLSX_FILE_EXTENSION = r".[xX][lL][sS][xX]$"
+XLSX_FILE_EXTENSION = r".*.[xX][lL][sS][xX]$|.*.[xX][lL][sS]$"
 
 
 class SpreadsheetFile:
@@ -26,7 +26,9 @@ class SpreadsheetFile:
         return match(self.expected_file_extension, self.get_filename())
 
     def get_data(self):
-        return open(self.path, 'r').readlines()
+        with open(self.path, 'r') as file:
+            data = file.readlines()
+        return data
     
     def set_data(self, spreadsheet_data):
         self.data = spreadsheet_data
