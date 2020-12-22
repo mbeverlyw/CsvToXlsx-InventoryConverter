@@ -8,7 +8,7 @@ from .. import csv_compiler
 
 class TestCsvObject(unittest.TestCase):
     def setUp(self):
-        self.csv = csv_compiler._base.CSV('data\\stage\\generated_inventory.csv')
+        self.csv = csv_compiler._base.CSV('data/stage/generated_inventory.csv')
 
     def test_get_filename(self):
         # Test if filename gets expected filename
@@ -22,7 +22,7 @@ class TestCsvObject(unittest.TestCase):
 
 class TestXlsxObject(unittest.TestCase):
     def setUp(self):
-        self.xlsx = csv_compiler._base.XLSX('data\\stage\\generated_inventory.xlsx')
+        self.xlsx = csv_compiler._base.XLSX('data/stage/generated_inventory.xlsx')
 
     def test_get_filename(self):
         # Test if filename gets expected filename
@@ -38,5 +38,11 @@ class TestStageLoaderObject(unittest.TestCase):
     def setUp(self):
         self.stage = csv_compiler.stage_loader.StageLoader()
 
-    def test_no_files_are_staged(self):
-        self.assertRaises()
+    def test_for_stage_dir_exists(self):
+        # Test if the stage directory exists
+        self.assertTrue(self.stage._stage_exists())
+    
+    def test_for_stage_dir_containing_no_files(self):
+        self.assertTrue(self.stage._staged_files_exist())
+
+    

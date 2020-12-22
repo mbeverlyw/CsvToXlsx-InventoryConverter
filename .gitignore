@@ -7,3 +7,12 @@ InventoryImportCompiler/tests/__pycache__/__init__.cpython-39.pyc
 InventoryImportCompiler/tests/__pycache__/test_csv_compiler.cpython-39.pyc
 data/stage/generated_inventory.csv
 data/stage/generated_inventory.xlsx
+data/importable_spreadsheets/20201221_210452-0-importable_spreadsheet.xlsx
+InventoryImportCompiler/__pycache__/__init__.cpython-38.pyc
+InventoryImportCompiler/csv_compiler/__pycache__/__init__.cpython-38.pyc
+InventoryImportCompiler/csv_compiler/__pycache__/_base.cpython-38.pyc
+InventoryImportCompiler/csv_compiler/__pycache__/processor.cpython-38.pyc
+InventoryImportCompiler/csv_compiler/__pycache__/stage_loader.cpython-38.pyc
+InventoryImportCompiler/csv_compiler/__pycache__/writer.cpython-38.pyc
+InventoryImportCompiler/tests/__pycache__/__init__.cpython-38.pyc
+InventoryImportCompiler/tests/__pycache__/test_csv_compiler.cpython-38.pyc
