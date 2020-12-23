@@ -11,6 +11,34 @@ Barcode attribute is a priority of:
     upc > Manufacturer Product Id > sku
 
 
+######################################################################################################
 
+Version 2 - 
+
+Problem: Would like more flexibility in this type of operation. 
+
+Current Solution Constraints: 
+    1.) Only .CSV -> .XLSX
+    2.) Columns for migrating data/elements/decisions are pretty static/hardcoded.
+    3.) Stage dir and results dir are static/hard coded
+    4.) Usage is... not self-explanatory..
+
+Proposed Solutions per Constraint:
+    1.) Allow flexibility via simplified usage.
+        Example:
+            migrator = Migrator()
+            reference_spreadsheet = Xlsx(<filepath>)
+            target_spreadsheet = Csv(<filepath>)
+
+            migrator.set_column_rules(dict(
+                <target_column_name>: [<reference column names per priority]
+            ))
+
+            migrator.execute()
+    
+    2.) (See Above)
+    3.) Remove both concepts, as they're pretty redundant.
+    4.) (See Above)
+            
 
 
