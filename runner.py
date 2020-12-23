@@ -7,20 +7,13 @@ import datetime
 
 def main():
     stage = StageLoader()
+    file_processor = CsvToXlsxConverter()
 
-    if stage._staged_files_exist():
-        process_staged_files(stage.staged_files)
-
-
-def process_staged_files(staged_files):
-    file_processor = Processor()
-
-    for index, file in enumerate(staged_files):
-        print(f"File Found: {file}")
+    for index, file in enumerate(stage.get_staged_csv_files()):
         file_processor.set_csv(file)
-        file_processor.generate_xlsx_data()
+        generated_xlsx_data = file_processor.generate_xlsx_data()
 
-        create_importable_file(index, file_processor.generated_xlsx_data)
+        create_importable_file(index, generated_xlsx_data)
 
 
 def create_importable_file(index, generated_xlsx_data):

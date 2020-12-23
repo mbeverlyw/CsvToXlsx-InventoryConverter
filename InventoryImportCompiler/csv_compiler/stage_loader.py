@@ -38,7 +38,16 @@ class StageLoader:
         else:    
             raise NoFilesFoundInStage
 
-    def get_staged_csv_files(self, files_in_stage_dir):
+    def get_staged_csv_files(self, files_in_stage_dir=None):
+        def _knows_files_in_stage_dir():
+            if files_in_stage_dir is None:
+                return False
+            else:
+                return True
+        
+        if not _knows_files_in_stage_dir():
+            files_in_stage_dir = self._get_staged_files()
+
         valid_staged_files = []
 
         for file in files_in_stage_dir:

@@ -18,3 +18,4 @@ InventoryImportCompiler/tests/__pycache__/__init__.cpython-38.pyc
 InventoryImportCompiler/tests/__pycache__/test_csv_compiler.cpython-38.pyc
 data/stage/generated_inventory.xls
 InventoryImportCompiler/csv_compiler/__pycache__/exceptions.cpython-38.pyc
+data/importable_spreadsheets/20201223_015814-0-importable_spreadsheet.xlsx
