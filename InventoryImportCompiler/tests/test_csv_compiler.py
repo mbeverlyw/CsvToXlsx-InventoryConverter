@@ -18,7 +18,7 @@ from ..csv_compiler.exceptions import (
     NoTargetCsvObjectError,
 )
 
-
+"""
 
 class TestSpreadsheetFileObject(unittest.TestCase):
     def setUp(self):
@@ -376,3 +376,4 @@ class TestCsvToXlsxConverter(unittest.TestCase):
         )
 
 
+"""
