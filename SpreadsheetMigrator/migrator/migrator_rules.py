@@ -17,7 +17,7 @@ class Rule:
     def __get_reference_columns(self):
         return self.reference_columns
 
-    def process_row(self, row):
+    def apply(self, row):
 
         for r_col in self.__get_reference_columns():
             pass

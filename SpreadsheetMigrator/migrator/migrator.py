@@ -12,14 +12,14 @@ class Migrator:
     def execute(self):
         pass
 
-    def __get_column_rules()
+    def __get_column_rules(self):
         return self.column_rules
 
     def set_column_rules(self, rules):
         self.column_rules = self.__create_rules_from_list(rules)
     
-    def __create_rules_from_list(self, rules)
-        rules = []
+    def __create_rules_from_list(self, rules):
+        rules_list = []
 
         for target_col, ref_cols in rules.items():
             rules.append(Rule(target_col, ref_cols))

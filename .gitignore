@@ -28,3 +28,8 @@ SpreadsheetMigrator/tests/__pycache__/test_file_types.cpython-38.pyc
 data/test.xls
 data/test.txt
 data/test.csv
+SpreadsheetMigrator/file_types/__pycache__/xlsx.cpython-38.pyc
+SpreadsheetMigrator/migrator/__pycache__/migrator_rules.cpython-38.pyc
+SpreadsheetMigrator/migrator/__pycache__/__init__.cpython-38.pyc
+SpreadsheetMigrator/migrator/__pycache__/migrator.cpython-38.pyc
+data/test.xlsx
