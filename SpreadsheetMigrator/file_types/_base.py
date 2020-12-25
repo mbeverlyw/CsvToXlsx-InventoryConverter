@@ -63,7 +63,7 @@ class File:
         return self._read_data_from_file()
     
     def _read_data_from_file(self):
-        with open(self.path, 'r+') as f:
+        with open(self.path, 'r') as f:
             data = f.read()
         
         return data
