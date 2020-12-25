@@ -2,7 +2,7 @@ from .datatype_handler import (
     to_str, to_list
 )
 
-
+# TODO rework Rule to be a namedtuple and move to migrator.Migrator() class.
 class Rule:
     target_column = None
     reference_columns = None

@@ -5,8 +5,9 @@ from . import File
 
 FILE_EXTENSION_REGEX = r".*.[xX][lL][sS][xX]$|.*.[xX][lL][sS]$"
 
-
+# TODO rename Xlsx as Xls
 class Xlsx(File):
+    #TODO insert type hints for functions 
     def __init__(self, filepath):
         super().__init__(filepath, FILE_EXTENSION_REGEX)
 

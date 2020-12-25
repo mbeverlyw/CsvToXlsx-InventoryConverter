@@ -7,6 +7,7 @@ FILE_EXTENSION_REGEX = r".*.[cC][sS][vV]$"
 
 
 class Csv(File):
+    #TODO insert type hints for functions 
     def __init__(self, filepath):
         super().__init__(filepath, FILE_EXTENSION_REGEX)
 

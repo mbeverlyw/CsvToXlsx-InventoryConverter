@@ -3,6 +3,7 @@ from re import match
 
 
 class File:
+    #TODO insert type hints for functions 
     path = None
     data = None
     expected_file_extension = None
