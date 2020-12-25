@@ -123,13 +123,7 @@ class TestRule(unittest.TestCase):
         self.target_df = pd.DataFrame(
             {'Column A': []}
         )
-        self.reference_df = pd.DataFrame(
-            {
-                'Column 1': ['1', '', '1', '1', ''],
-                'Column 2': ['2', '', '2', '', '2'],
-                'Column 3': ['3', '', '', '3', '3']
-            }
-        )
+        self.reference_df = Csv('data/examples/test.csv').read()
         self.rule = Rule(
             self.target_df.columns[0], 
             self.reference_df.columns[0]
@@ -207,9 +201,22 @@ class TestRule(unittest.TestCase):
 class TestMigrator(unittest.TestCase):
     def setUp(self):
         self.csv_ref = Csv('data/test.csv')
-        self.xlsx_ref = Xlsx('data/test.csv')
+        self.xlsx_ref = Xlsx('data/test.xls')
         self.csv_tar = Csv('data/test_result.csv')
-        self.xlsx_tar = Xlsx('data/test_result.xlsx')
+        self.xlsx_tar = Xlsx('data/test_result.xls')
+
+        self.migrator = Migrator(self.csv_ref, self.csv_tar)
+
+        self.rules_arg = {
+            'Column A': 'Column 3',
+            'Column B': ['Column 1', 'Column 2'],
+        }
+
+    def test_set_column_rules(self):
+        pass
+
+    def test_set_column_rules_list_arg(self):
+        rules_arg = ['Column A', 'Column B']
 
 
     def test_execute(self):

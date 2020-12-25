@@ -35,3 +35,8 @@ SpreadsheetMigrator/migrator/__pycache__/migrator.cpython-38.pyc
 data/test.xlsx
 SpreadsheetMigrator/migrator/__pycache__/datatype_handler.cpython-38.pyc
 SpreadsheetMigrator/tests/__pycache__/test_migrator.cpython-38.pyc
+data/examples/test.bak
+data/examples/test.csv
+data/examples/test.txt
+data/examples/test.xls
+data/examples/test.xlsx

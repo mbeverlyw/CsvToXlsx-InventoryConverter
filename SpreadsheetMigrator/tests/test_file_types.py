@@ -11,7 +11,7 @@ from ..file_types import (
 
 class TestFileObject(unittest.TestCase):
     def setUp(self):
-        self.file = File('data/test.txt')
+        self.file = File('data/examples/test.txt')
     
     def test_get_filename(self):
         expected_val = 'test.txt'
@@ -63,20 +63,15 @@ class TestFileObject(unittest.TestCase):
         )
 
     def test_read_file_file_does_not_exist(self):
-        self.file.path = Path('data/null.txt')
+        self.file.path = Path('data/examples/null.txt')
         with self.assertRaises(FileNotFoundError):
             self.file.read()
 
 
 class TestCsvObject(unittest.TestCase):
     def setUp(self):
-        self.file = Csv('data/test.csv')
-        self.df = pd.DataFrame(
-            {
-                'a': ['1', '2'],
-                'b': ['3', '4'],
-            }
-        )
+        self.file = Csv('data/examples/test.csv')
+        self.df = pd.read_csv('data/examples/test.csv')
     
     def test_get_filename(self):
         expected_val = 'test.csv'
@@ -125,23 +120,18 @@ class TestCsvObject(unittest.TestCase):
         )
 
     def test_read_file_file_does_not_exist(self):
-        self.file.path = Path('data/null.csv')
+        self.file.path = Path('data/examples/null.csv')
         with self.assertRaises(FileNotFoundError):
             self.file.read()
 
 
 class TestXlsxObject(unittest.TestCase):
     def setUp(self):
-        self.file = Xlsx('data/test.xlsx')
-        self.df = pd.DataFrame(
-            {
-                'a': ['1', '2'],
-                'b': ['3', '4'],
-            }
-        )
+        self.file = Xlsx('data/examples/test.xls')
+        self.df = pd.read_excel('data/examples/test.xls')
     
     def test_get_filename(self):
-        expected_val = 'test.xlsx'
+        expected_val = 'test.xls'
         self.assertEqual(
             self.file.get_filename(),
             expected_val
@@ -194,7 +184,7 @@ class TestXlsxObject(unittest.TestCase):
         pass
     
     def test_read_file_file_does_not_exist(self):
-        self.file.path = Path('data/null.xlsx')
+        self.file.path = Path('data/examples/null.xls')
 
         with self.assertRaises(FileNotFoundError):
             self.file.read()
